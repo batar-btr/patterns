@@ -1,39 +1,19 @@
-'use strict';
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+"use strict";
 
 (function () {
-    var Box = function Box(x, y) {
-        _classCallCheck(this, Box);
 
-        this.x = x;
-        this.y = y;
-    };
-
-    var obj = {
-        weight: 100,
-        height: 250,
-        newBox: function (param) {
-            console.log(param);
-        }(obj),
-        getSquare: function getSquare() {
-            console.log(this.weight * this.height);
-            return this.weight * this.height;
+    function fib(x) {
+        if (!fib.cache[x]) {
+            x > 1 ? fib.cache[x] = fib(x - 1) + fib(x - 2) : fib.cache[x] = x;
         }
-    };
-
-    function showSquare(callback, context) {
-        if (typeof callback != 'function') {
-            callback = false;
-        }
-
-        if (callback) {
-            callback.call(context);
-        }
-        return 123;
+        return fib.cache[x];
     }
 
-    console.log(showSquare(obj.getSquare, obj));
+    fib.cache = {};
 
-    console.log(obj);
+    console.log(fib(500));
+
+    for (var i = 0; i < 50; i++) {
+        console.log(fib(i));
+    }
 })();

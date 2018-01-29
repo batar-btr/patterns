@@ -1,41 +1,18 @@
 (() => {
     
-    class Box {
-        constructor(x, y) {
-            this.x = x;
-            this.y = y;
+    function fib(x) {
+        if(!fib.cache[x]) {
+            x > 1 ? fib.cache[x] = fib(x-1) + fib(x-2) : fib.cache[x] = x;
         }
+        return fib.cache[x];
     }
 
-    let obj = {
-        weight: 100,
-        height: 250,
-        newBox: ((param)=>{
-            console.log(param);
-        })(obj),
-        getSquare() {
-            console.log(this.weight * this.height);
-            return this.weight * this.height;
-        }
-    };
+    fib.cache = {};
 
+    console.log(fib(500));
 
-    function showSquare(callback, context) {
-        if(typeof callback != 'function') {
-            callback = false;
-        }
-
-        if(callback) {
-            callback.call(context);
-        }
-        return 123;
+    for(var i = 0; i < 50; i++) {
+        console.log(fib(i));
     }
-
-    console.log(showSquare(obj.getSquare, obj));
-
-    console.log(obj);
 
 })();
-
-
-
