@@ -36,4 +36,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     console.log(showSquare(obj.getSquare, obj));
 
     console.log(obj);
+
+    function test() {
+        return arguments.length;
+    }
+
+    console.log(test(1, 2, 3, 4, 5));
 })();
