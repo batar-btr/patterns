@@ -1,45 +1,80 @@
 'use strict';
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function () {
-    var Box = function Box(x, y) {
-        _classCallCheck(this, Box);
 
+    function Moon() {
+        var instance = this;
+        if (_typeof(Moon.instance) === 'object') {
+            return Moon.instance;
+        }
+
+        this.name = 'planet';
+        this.color = 'gray';
+        this.getInstance = function () {
+            return instance;
+        };
+
+        Moon.instance = this;
+    }
+
+    var planet = new Moon();
+    var planet2 = new Moon();
+
+    console.log(planet == planet2);
+    console.log(planet.getInstance());
+
+    function Box(x, y) {
+        console.log('start constructor....');
         this.x = x;
         this.y = y;
-    };
+    }
+
+    // var obj = {
+    //     w: 100,
+    //     h: 200,
+    //     get box1() {
+
+    //         if(typeof Box.clouds === 'object' ) {
+    //             return Box.clouds;
+    //         }
+    //         Box.clouds = new Box(this.w, this.h);
+    //         return Box.clouds;
+    //     }
+    // }
+
+    // var boxA = obj.box1;
+    // var boxB = obj.box1;
+    // console.log(boxA===boxB);
 
     var obj = {
-        weight: 100,
-        height: 250,
-        newBox: function (param) {
-            console.log(param);
-        }(obj),
-        getSquare: function getSquare() {
-            console.log(this.weight * this.height);
-            return this.weight * this.height;
+        w: 100,
+        h: 200,
+        get box1() {
+            //    this.box1.www = 10;
+            var obj = new Box(this.w, this.h);
+            delete this.box1;
+            return this.box1 = obj;
         }
     };
 
-    function showSquare(callback, context) {
-        if (typeof callback != 'function') {
-            callback = false;
-        }
+    var boxA = obj.box1;
+    var boxB = obj.box1;
+    var boxC = obj.box1;
+    var boxD = obj.box1;
+    var boxE = obj.box1;
+    console.log(boxA === boxD);
+    console.log(boxA === boxC);
+    console.log(boxA === boxB);
+    console.log(boxA === boxE); // true
+    // console.log(obj)
 
-        if (callback) {
-            callback.call(context);
-        }
-        return 123;
-    }
+    // function www() {
+    //     www.bbb = 10;
+    //     console.log(www.bbb);
+    // };
 
-    console.log(showSquare(obj.getSquare, obj));
+    // www();
 
-    console.log(obj);
-
-    function test() {
-        return arguments.length;
-    }
-
-    console.log(test(1, 2, 3, 4, 5));
 })();
