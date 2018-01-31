@@ -15,16 +15,35 @@
                     return null;
                 }
                 element = data[index];
-                index += 2;
+                index++;
                 return element;
             },
             hasNext: function hasNext() {
                 return index < data.length;
+            },
+            reset: function reset() {
+                index = 0;
+            },
+            current: function current() {
+                return data[index];
+            },
+            showState: function showState() {
+                console.log("this index = " + index);
+                console.log("this.length = " + length);
             }
+
         };
     }();
 
     while (iterator.hasNext()) {
-        console.log(iterator.next());
+        console.log(iterator.next() * 10000);
     }
+
+    iterator.showState();
+    iterator.reset();
+    console.log(iterator.current());
+    iterator.next();
+    console.log(iterator.current());
+    iterator.next();
+    console.log(iterator.current());
 })();
