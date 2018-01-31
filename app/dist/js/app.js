@@ -1,55 +1,30 @@
-'use strict';
+"use strict";
 
 (function () {
 
-    function CarMaker() {};
+    var iterator = function () {
+        var index = 0;
+        var data = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+        var length = data.length;
 
-    CarMaker.prototype.drive = function () {
-        console.log('Vroom, i have ' + this.wheels + ' wheels');
-    };
+        return {
+            next: function next() {
+                var element;
 
-    CarMaker.factory = function (type) {
-        var constr = type,
-            newcar;
-
-        if (typeof CarMaker[constr] !== 'function') {
-            throw {
-                name: 'Error',
-                message: constr + ' doesn\'t exist'
-            };
+                if (!this.hasNext()) {
+                    return null;
+                }
+                element = data[index];
+                index += 2;
+                return element;
+            },
+            hasNext: function hasNext() {
+                return index < data.length;
+            }
         };
-        if (typeof CarMaker[constr].drive !== 'function') {
-            CarMaker[constr].prototype = new CarMaker();
-        }
+    }();
 
-        // create new example
-
-        newcar = new CarMaker[constr]();
-        return newcar;
-    };
-
-    CarMaker.Compact = function () {
-        this.wheels = 4;
-    };
-
-    CarMaker.Large = function () {
-        this.wheels = 8;
-    };
-
-    CarMaker.Track = function () {
-        this.wheels = 18;
-    };
-
-    var car = CarMaker.factory('Compact');
-    var bus = CarMaker.factory('Large');
-    var track = CarMaker.factory('Track');
-
-    var park = [car, bus, track];
-
-    park.forEach(function (item) {
-        return item.drive();
-    });
-
-    // console.log(car);
-
+    while (iterator.hasNext()) {
+        console.log(iterator.next());
+    }
 })();
